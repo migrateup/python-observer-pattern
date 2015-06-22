@@ -10,15 +10,15 @@ class Publisher:
         # str -> dict
         self.events = { event : dict()
                           for event in events }
-    def subscribers(self, event):
+    def get_subscribers(self, event):
         return self.events[event]
     def register(self, event, who, callback=None):
         if callback == None:
             callback = getattr(who, 'update')
-        self.subscribers(event)[who] = callback
+        self.get_subscribers(event)[who] = callback
     def unregister(self, event, who):
-        del self.subscribers(event)[who]
+        del self.get_subscribers(event)[who]
     def dispatch(self, event, message):
-        for subscriber, callback in self.subscribers(event).items():
+        for subscriber, callback in self.get_subscribers(event).items():
             callback(message)
         
