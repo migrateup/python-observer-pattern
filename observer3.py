@@ -5,20 +5,20 @@ class Subscriber:
         print('{} got message "{}"'.format(self.name, message))
         
 class Publisher:
-    def __init__(self, channels):
-        # maps channel names to subscribers
+    def __init__(self, events):
+        # maps event names to subscribers
         # str -> dict
-        self.channels = { channel : dict()
-                          for channel in channels }
-    def subscribers(self, channel):
-        return self.channels[channel]
-    def register(self, channel, who, callback=None):
+        self.events = { event : dict()
+                          for event in events }
+    def subscribers(self, event):
+        return self.events[event]
+    def register(self, event, who, callback=None):
         if callback == None:
             callback = getattr(who, 'update')
-        self.subscribers(channel)[who] = callback
-    def unregister(self, channel, who):
-        del self.subscribers(channel)[who]
-    def dispatch(self, channel, message):
-        for subscriber, callback in self.subscribers(channel).items():
+        self.subscribers(event)[who] = callback
+    def unregister(self, event, who):
+        del self.subscribers(event)[who]
+    def dispatch(self, event, message):
+        for subscriber, callback in self.subscribers(event).items():
             callback(message)
         
