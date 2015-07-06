@@ -1,4 +1,4 @@
-from observer3 import *
+from observer3 import Publisher, Subscriber
 
 pub = Publisher(['lunch', 'dinner'])
 bob = Subscriber('Bob')

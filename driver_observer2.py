@@ -1,4 +1,4 @@
-from observer2 import *
+from observer2 import Publisher, SubscriberOne, SubscriberTwo
 
 pub = Publisher()
 bob = SubscriberOne('Bob')
